@@ -24,7 +24,6 @@ export default function SignIn() {
         <button className=' cursor-pointer text-white py-[14px] mt-[40px] mb-[24px] px-[67px] bg-[#FC4747] rounded-[6px]'>
           Login to your account
         </button>
-
         <p className='text-white font-[15px] text-center'>
           Don’t have an account?{" "}
           <span className='text-[#FC4747] ml-[6px] cursor-pointer'>
