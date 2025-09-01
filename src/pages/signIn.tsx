@@ -1,4 +1,6 @@
 import FloatingInput from "../shared/FloatingInput";
+import { Link } from "react-router-dom";
+import {motion} from "framer-motion"
 
 export default function SignIn() {
   return (
@@ -15,22 +17,31 @@ export default function SignIn() {
           fill='#FC4747'
         />
       </svg>
-      <div className='bg-[#161D2F] w-full max-w-xs  flex flex-col    rounded-xl  pt-6 px-6 pb-8 '>
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{ duration: 0.3 }}
+        className='bg-[#161D2F] w-full max-w-sm  flex flex-col    rounded-xl  pt-6 px-6 pb-8 '
+      >
         <h2 className='text-[32px] mb-[40px]  text-white'>Login</h2>
         <div className=' flex flex-col gap-[30px]'>
-          <FloatingInput label='Email adress' type="text" />
-          <FloatingInput label='Password' type="password" />
+          <FloatingInput label='Email adress' type='text' />
+          <FloatingInput label='Password' type='password' />
         </div>
         <button className=' w-full cursor-pointer text-white py-3 mt-10 mb-6  bg-[#FC4747] rounded-md'>
           Login to your account
         </button>
         <p className='text-white text-[15px] text-center'>
           Don’t have an account?{" "}
-          <span className='text-[#FC4747] ml-[6px] cursor-pointer'>
+          <Link
+            to={"/signup"}
+            className='text-[#FC4747] ml-[6px] cursor-pointer'
+          >
             Sign Up
-          </span>
+          </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 }
