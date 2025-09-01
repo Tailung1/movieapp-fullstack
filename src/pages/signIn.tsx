@@ -1,10 +1,45 @@
 import FloatingInput from "../shared/FloatingInput";
 import { Link } from "react-router-dom";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function SignIn() {
+  const [loginEmailInput, setLoginEmailInput] = useState<string>("");
+  const [loginPasswordInput, setLoginPasswordInput] =
+    useState<string>("");
+  const [errors, setErrors] = useState({
+    email: false,
+    password: false,
+  });
+
+  const handleChange = (
+    field: "email" | "password",
+    value: string
+  ) => {
+    if (field === "email") setLoginEmailInput(value);
+    if (field === "password") setLoginPasswordInput(value);
+
+    // Remove error as soon as user starts typing
+    setErrors((prev) => ({ ...prev, [field]: false }));
+  };
+
+  const handleSubmit = () => {
+    const newErrors = {
+      email: loginEmailInput.trim() === "",
+      password: loginPasswordInput.trim() === "",
+    };
+    setErrors(newErrors);
+
+    if (!newErrors.email && !newErrors.password) {
+      console.log("Login successful:", {
+        loginEmailInput,
+        loginPasswordInput,
+      });
+    }
+  };
+
   return (
-    <div className='bg-[#10141E]  flex flex-col gap-16 items-center h-screen pt-[48px] px-[24px] pb-[170px]'>
+    <div className='bg-[#10141E] flex flex-col gap-16 items-center h-screen pt-[48px] px-[24px] pb-[170px]'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='32'
@@ -17,28 +52,47 @@ export default function SignIn() {
           fill='#FC4747'
         />
       </svg>
+
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 0.3 }}
-        className='bg-[#161D2F] w-full max-w-sm  flex flex-col    rounded-xl  pt-6 px-6 pb-8 '
+        className='bg-[#161D2F] w-full max-w-sm flex flex-col rounded-xl pt-6 px-6 pb-8'
       >
-        <h2 className='text-[32px] mb-[40px]  text-white'>Login</h2>
-        <div className=' flex flex-col gap-[30px]'>
-          <FloatingInput label='Email adress' type='text' />
-          <FloatingInput label='Password' type='password' />
+        <h2 className='text-[32px] mb-[40px] text-white'>Login</h2>
+
+        <div className='flex flex-col gap-[30px]'>
+          <FloatingInput
+            label='Email address'
+            type='text'
+            value={loginEmailInput}
+            onChange={(val) => handleChange("email", val)}
+            isError={errors.email}
+          />
+          <FloatingInput
+            label='Password'
+            type='password'
+            value={loginPasswordInput}
+            onChange={(val) => handleChange("password", val)}
+            isError={errors.password}
+          />
         </div>
-        <button className=' w-full cursor-pointer text-white py-3 mt-10 mb-6  bg-[#FC4747] rounded-md'>
+
+        <button
+          onClick={handleSubmit}
+          className='w-full cursor-pointer text-white py-3 mt-10 mb-6 bg-[#FC4747] rounded-md'
+        >
           Login to your account
         </button>
+
         <p className='text-white text-[15px] text-center'>
           Don’t have an account?{" "}
           <Link
             to={"/signup"}
             className='text-[#FC4747] ml-[6px] cursor-pointer'
           >
-            Sign Up
+            Sign In
           </Link>
         </p>
       </motion.div>
