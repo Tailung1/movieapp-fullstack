@@ -1,14 +1,16 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function FloatingInput({ label }: { label: string }) {
+export default function FloatingInput({ label,type}: { label: string,type:string }) {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState("");
   const isActive = focused || value;
   return (
     <div className='relative'>
       <motion.label
-        className='absolute pointer-events-none'
+        className={`absolute pointer-events-none ${
+          isActive ? "text-indigo-500" : "text-gray-500"
+        }`}
         animate={{
           y: isActive ? -25 : 0,
           x: isActive ? 5 : 16,
@@ -19,8 +21,10 @@ export default function FloatingInput({ label }: { label: string }) {
         {label}
       </motion.label>
       <input
-        className='w-full border-b-[0.5px] pb-[14px] pl-[16px] border-gray-500 outline-none  bg-transparent'
-        type='text'
+        className='w-full border-b border-white/20 text-white pb-[14px] pl-[16px] border-gray-500 outline-none  bg-transparent'
+        type={type}
+    
+        autoComplete='off'
         onChange={(e) => setValue(e.target.value)}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}

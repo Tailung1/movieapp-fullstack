@@ -2,7 +2,7 @@ import FloatingInput from "../shared/FloatingInput";
 
 export default function SignIn() {
   return (
-    <div className='bg-[#10141E]  flex flex-col gap-[58.4px] items-center h-screen pt-[48px] px-[24px] pb-[170px]'>
+    <div className='bg-[#10141E]  flex flex-col gap-16 items-center h-screen pt-[48px] px-[24px] pb-[170px]'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='32'
@@ -15,16 +15,16 @@ export default function SignIn() {
           fill='#FC4747'
         />
       </svg>
-      <div className='bg-[#161D2F] flex flex-col   rounded-[10px]  pt-[24px] px-[24px] pb-[32px] '>
+      <div className='bg-[#161D2F] flex flex-col   rounded-xl  pt-6 px-6 pb-8 '>
         <h2 className='text-[32px] mb-[40px]  text-white'>Login</h2>
         <div className=' flex flex-col gap-[30px]'>
-          <FloatingInput label='Email Adress' />
-          <FloatingInput label='Password' />
+          <FloatingInput label='Email adress' type="text" />
+          <FloatingInput label='Password' type="password" />
         </div>
-        <button className=' cursor-pointer text-white py-[14px] mt-[40px] mb-[24px] px-[67px] bg-[#FC4747] rounded-[6px]'>
+        <button className=' cursor-pointer text-white py-3 mt-[40px] mb-6 px-16 bg-[#FC4747] rounded-[6px]'>
           Login to your account
         </button>
-        <p className='text-white font-[15px] text-center'>
+        <p className='text-white text-base text-center'>
           Don’t have an account?{" "}
           <span className='text-[#FC4747] ml-[6px] cursor-pointer'>
             Sign Up
